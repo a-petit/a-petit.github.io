@@ -45,6 +45,10 @@ help:
 clean:
 	rm -rf $(OUTPUTDIR)/feeds
 	rm -rf $(OUTPUTDIR)/theme
+	rm -rf $(OUTPUTDIR)/author
+	rm -rf $(OUTPUTDIR)/category
+	rm -rf $(OUTPUTDIR)/pages
+	rm -rf $(OUTPUTDIR)/images
 	rm -rf $(OUTPUTDIR)/**.html
 
 devserver:
@@ -53,9 +57,9 @@ devserver:
 publish:
 	"$(PELICAN)" "$(INPUTDIR)" -o "$(OUTPUTDIR)" -s "$(PUBLISHCONF)" $(PELICANOPTS)
 
-github: publish
-	ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) "$(OUTPUTDIR)"
+github: clean publish
+	git add -A
+	git commit -m "Update site"
 	git push origin $(GITHUB_PAGES_BRANCH)
 
-
-.PHONY: html help clean regenerate serve serve-global devserver devserver-global publish github
+.PHONY: help clean devserver publish github

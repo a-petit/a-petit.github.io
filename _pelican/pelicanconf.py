@@ -3,6 +3,7 @@ SITENAME = 'Alexandre Petit'
 SITEURL = ""
 
 PATH = "content"
+THEME = 'themes/a-petit'
 
 TIMEZONE = 'Europe/Paris'
 
